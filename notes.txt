@@ -1,0 +1,83 @@
+db_data is the name of the developpement database 
+this database should probably be in this directory to be able to push
+the mdofications to our droplet if we make some.
+
+-Should we point laradock to the same volume?
+
+-Exemple of a php.dockerfile
+FROM php:7.4-fpm-alpine
+
+ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
+
+RUN addgroup -g 1000 wp && adduser -G wp -g wp -s /bin/sh -D wp
+
+RUN mkdir -p /var/www/html
+
+RUN chown wp:wp /var/www/html
+
+WORKDIR /var/www/html
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
+
+-credentials wp
+If you used the same environment variables in your docker-compose.yml file as the ones earlier, that would be
+
+Database Name: wp
+User Name: wp
+Password: secret
+Database Host: mysql
+
+--#Fijamos la zona horaria a nivel contendor.
+ENV TZ=Europe/Madrid
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# Actualización de sistema e instalación de paquetes
+RUN apt-get install -y \
+    git \
+    imagemagick \
+    apache2 \
+    jpegoptim \
+    php7.1 \
+    acl \
+    libapache2-mod-php7.1 \
+    php7.1-curl \
+    php7.1-xml \
+    php7.1-mbstring \
+    nodejs \
+    unzip \
+    npm \
+    php7.1-gd \
+    php7.1-intl \
+    php7.1-xsl \
+    php7.1-mysql
+
+    # Copia de los ficheros de configuración de apache y php
+COPY apache/site.conf /etc/apache2/sites-available/site.conf
+COPY php/php.ini /etc/php/7.1/apache2/php.ini
+# Habilitar el sitio en apache y deshabilitar el que viene por defecto
+RUN a2ensite site.conf && \
+    a2dissite 000-default.conf
+# Habilitar los modulos de apache necesarios
+RUN a2enmod php7.1 && \
+    a2enmod rewrite && \
+    a2enmod actions && \
+    a2enmod deflate && \
+    a2enmod expires && \
+    a2enmod headers && \
+    a2enmod actions && \
+    a2enmod proxy
+# Instalar los paquete npm necesarios para la aplicación
+RUN npm install -g less && \
+    npm install uglify-js -g && \
+    npm install uglifycss -g
+# Creación de los directorios necesarios para symfony
+RUN mkdir -p /var/www/app/cache && \
+    mkdir -p /var/www/app/logs && \
+    mkdir -p /media/tmp && \
+    mkdir -p /media/uploads
+# Enlace simbolico de nodejs para Symfony
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+# Permisos en los directorios
+RUN chmod -R 777 /media/tmp && \
+    chmod -R 777 /media/uploads
+RUN chown -R www-data:www-data /media/tmp && \
+    chown -R www-data:www-data /media/uploads
