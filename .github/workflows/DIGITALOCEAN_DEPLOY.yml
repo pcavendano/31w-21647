@@ -10,5 +10,7 @@ jobs:
       - uses: actions/checkout@main
       - name: Create .env
         run: echo 'PORT=${{secrets.PORT}}' > .env
+      - name: Delete volume db_data
+        run: docker volume rm db_data
       - name: Run docker compose up build
         run: docker-compose up -d
