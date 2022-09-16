@@ -10,5 +10,5 @@ jobs:
       - uses: actions/checkout@main
       - name: Create .env
         run: echo 'PORT=${{secrets.PORT}}' > .env
-      - name: Run build
+      - name: Run docker compose up build
         run: docker-compose up -d

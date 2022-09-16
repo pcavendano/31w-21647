@@ -1,10 +1,26 @@
-db_data is the name of the developpement database 
+//Developement
+
+-${PORT:-8000}: if there is not a PORT variable in the scope of this docker-compose file
+we use the default port 8000 but since we created a .env file we are going to put a
+port number for local dev purposes of 1234
+db_data is the name of the development database
+
 this database should probably be in this directory to be able to push
-the mdofications to our droplet if we make some.
+the modifications to our droplet if we make some.   //false
 
--Should we point laradock to the same volume?
+-db_data is going to be a development database
+-we modified our laradock configuration to use this database
 
--Exemple of a php.dockerfile
+
+
+-Should we point laradock to the same volume?   //yes
+
+/*
+*************************
+Exemple of a php.dockerfile
+*************************
+*/
+
 FROM php:7.4-fpm-alpine
 
 ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
@@ -19,18 +35,41 @@ WORKDIR /var/www/html
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
--credentials wp
-If you used the same environment variables in your docker-compose.yml file as the ones earlier, that would be
+
+/*
+*************************
+-credentials wordpress
+*************************
+*/
+
+
+If you used the same environment variables in your html/docker-compose.yml
+ file as the ones earlier, that would be
 
 Database Name: wp
-User Name: wp
+UserName: wp
 Password: secret
 Database Host: mysql
 
---#Fijamos la zona horaria a nivel contendor.
+/*
+*************************
+Fijamos la zona horaria a nivel contendor.
+*************************
+*/
+
+
 ENV TZ=Europe/Madrid
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+
+
+/*
+*************************
 # Actualización de sistema e instalación de paquetes
+*************************
+*/
+
+
 RUN apt-get install -y \
     git \
     imagemagick \
@@ -81,3 +120,16 @@ RUN chmod -R 777 /media/tmp && \
     chmod -R 777 /media/uploads
 RUN chown -R www-data:www-data /media/tmp && \
     chown -R www-data:www-data /media/uploads
+
+
+
+//Production
+Important variables in our docker-compose.yml file
+for our local dev environement should be changed for production.
+
+Create github secret variables inside the repo with the correct
+values for our production database.
+
+ For exemple, MYSQL_ROOT_PASSWORD: somewordpress in developement
+ but in production we should modify the root user password
+ with a value that is not written anywhewre
