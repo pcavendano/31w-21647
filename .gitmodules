@@ -2,3 +2,6 @@
 	path = laradock
 	url = https://github.com/Laradock/laradock.git
 
+[submodule "html/wp-content/themes/21647-31w"]
+	path = html/wp-content/themes/21647-31w
+	url = https://github.com/pcavendano/21647-31w.git
