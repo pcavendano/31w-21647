@@ -10,7 +10,15 @@
 
 
 function genere_boite(){
-	$contenu = "	
+	$contenu = "
+    <style>
+    .carrousel {
+        border: 2px solid #aaa;
+        background-color : #0f0;
+        width: 200px;
+        height : 200px;
+    }
+    </style>    
     <div class='carrousel'>Carrousel</div>";
 	return $contenu;
 }
