@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../../themes-wordpress/21647-31w/.idea/21647-31w.iml" filepath="$PROJECT_DIR$/../../themes-wordpress/21647-31w/.idea/21647-31w.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/wordpress-docker.iml" filepath="$PROJECT_DIR$/.idea/wordpress-docker.iml" />
     </modules>
   </component>
