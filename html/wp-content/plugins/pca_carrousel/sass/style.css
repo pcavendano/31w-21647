@@ -1,4 +1,4 @@
-.carrousel{
+.carrousel {
   position: absolute;
   left: 25vw;
   right: 25vh;
@@ -9,11 +9,11 @@
   transition: transform 1s;
 }
 
-.carrousel-ouvrir{
+.carrousel-ouvrir {
   transform: scale(1);
 }
 
-.btn_fermer{
+.btn_fermer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,3 +23,5 @@
   width: 2rem;
   height: 2rem;
 }
+
+/*# sourceMappingURL=style.css.map */
