@@ -4,7 +4,7 @@
 * version 0.1
 */
 /*
-* Plugin Name: PCA_Carrousel
+* Plugin Name: pca_carrousel
 * version 0.1
 */
 
@@ -15,6 +15,8 @@ function genere_boite(){
     <button class='btn_modale'>boîte modale</button>
     <div class='carrousel'>
         <button class='btn_fermer'>X</button>
+        <figure class='carrousel__figure'></figure>
+        <form class='carrousel__form'></form>
     </div>";
 	return $contenu;
 }
@@ -24,7 +26,7 @@ function pcac_enqueue() {
 	$version_css = filemtime(plugin_dir_path(__FILE__)."style.css");
 	$version_js = filemtime(plugin_dir_path(__FILE__)."js/carrousel.js");
 	wp_enqueue_style("pca_style_carrousel",
-		plugin_dir_url(__FILE__)."sass/style.css",
+		plugin_dir_url(__FILE__)."style.css",
 		array(),
 		$version_css,
 		false);
