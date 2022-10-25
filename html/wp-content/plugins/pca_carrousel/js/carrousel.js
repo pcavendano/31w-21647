@@ -22,9 +22,23 @@
     let elmGalerieImg = document.querySelectorAll('.galerie figure img');
     /* ----------------Étape 1 parcourir les images de la galerie------------------------ */
 
-    for(const elmImg of elmGalerieImg){
-        ajouter_radio_carrousel();
+    for (const elmImg of elmGalerieImg) {
+        console.log(elmImg.getAttribute("src"));
+
         ajouter_img_carrousel(elmImg);
+        ajouter_radio_carrousel();
+        /* écouteur sur les images de la galerie */
+        elmImg.addEventListener("mousedown", function () {
+            console.log("galerie");
+            console.log("elmImg.dataset.index" + this.dataset.index);
+            elmCarrousel.classList.add("carrousel--ouvrir");
+            elmCarrousel__figure.children[this.dataset.index].classList.add(
+                "carrousel__figure__img--activer"
+            );
+            elmCarrousel__form.children[this.dataset.index].checked = true;
+            console.log(index);
+            dernierIndex = this.dataset.index;
+        });
     }
 
     /**
@@ -33,6 +47,7 @@
      */
     function ajouter_img_carrousel(elmImg) {
 // elmImg représente une image de la galerie */
+        elmImg.dataset.index = index;
         console.log(elmImg);
         let elmCarrousel__figure__img = document.createElement("img");
         elmCarrousel__figure__img.setAttribute("src", elmImg.getAttribute("src"));
@@ -57,7 +72,17 @@
         elmCarrousel__form__radio.addEventListener('mousedown', function (){
             console.log(this.dataset.index);
 
-            elmCarrousel__figure.children[this.dataset.index].classList.add('.carrousel__figure__img--activer');
+            if (dernierIndex != -1) {
+                elmCarrousel__figure.children[dernierIndex].classList.remove(
+                    "carrousel__figure__img--activer"
+                );
+            }
+
+            elmCarrousel__figure.children[this.dataset.index].classList.add(
+                "carrousel__figure__img--activer"
+            );
+            console.log(index);
+            dernierIndex = this.dataset.index;
         });
     }
 
