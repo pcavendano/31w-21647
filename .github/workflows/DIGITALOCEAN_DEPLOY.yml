@@ -12,3 +12,7 @@ jobs:
         run: echo 'PORT=${{secrets.PORT}}' > .env
       - name: Run docker compose up build
         run: docker-compose up -d
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
