@@ -14,5 +14,7 @@ jobs:
         run: docker-compose up -d
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Approve submodule
+        run: git config --global --add safe.directory /home/pcavendano/actions-runner/_work/31w-21647/31w-21647
       - name: Checkout submodules
         run: git submodule update --init --recursive
