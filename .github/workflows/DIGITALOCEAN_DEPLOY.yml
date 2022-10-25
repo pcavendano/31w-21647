@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - run: git submodule update --init --recursive
-      - name: Create .env
+      - name: Create .env file
         run: echo 'PORT=${{secrets.PORT}}' > .env
       - name: Run docker compose up build
         run: docker-compose up -d
