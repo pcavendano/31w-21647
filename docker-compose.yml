@@ -22,7 +22,7 @@ services:
     image: phpmyadmin/phpmyadmin
     restart: always
     ports:
-      - "${PORT:-8080}:90"
+      - '9090:80'
     environment:
       PMA_HOST: ${WORDPRESS_DB_HOST:-db}
       MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
