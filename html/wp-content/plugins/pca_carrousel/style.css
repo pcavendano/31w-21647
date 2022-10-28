@@ -4,6 +4,7 @@
   right: 12.5vh;
   width: 75vw;
   height: 75vh;
+  top: 200px;
   background-color: aqua;
   transform: scale(0);
   opacity: 0;
