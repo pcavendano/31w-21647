@@ -20,8 +20,8 @@
     /*Le conteneur principale de la galerie*/
     let elmGalerie = document.querySelector('.galerie');
     let elmGalerieImg = document.querySelectorAll('.galerie figure img');
-    /* ----------------Étape 1 parcourir les images de la galerie------------------------ */
 
+    /* ----------------Étape 1 parcourir les images de la galerie------------------------ */
     for (const elmImg of elmGalerieImg) {
         console.log(elmImg.getAttribute("src"));
 
@@ -69,6 +69,7 @@
         elmCarrousel__form__radio.dataset.index = index;
         index++;
         elmCarrousel__form.appendChild(elmCarrousel__form__radio);
+        /*------------------------- écouteur sur le bouton radio pour afficher une nouvelle image */
         elmCarrousel__form__radio.addEventListener('mousedown', function (){
             console.log(this.dataset.index);
 
