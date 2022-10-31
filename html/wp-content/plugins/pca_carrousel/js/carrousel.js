@@ -1,5 +1,4 @@
 (function () {
-    console.log("carrousel");
     /*
     * -----------------------------------Initialisation de variables-------------*/
     let index = 0;
@@ -20,17 +19,13 @@
     /*Le conteneur principale de la galerie*/
     let elmGalerie = document.querySelector('.galerie');
     let elmGalerieImg = document.querySelectorAll('.galerie figure img');
+
     /* ----------------Étape 1 parcourir les images de la galerie------------------------ */
-
     for (const elmImg of elmGalerieImg) {
-        console.log(elmImg.getAttribute("src"));
-
         ajouter_img_carrousel(elmImg);
         ajouter_radio_carrousel();
         /* écouteur sur les images de la galerie */
         elmImg.addEventListener("mousedown", function () {
-            console.log("galerie");
-            console.log("elmImg.dataset.index" + this.dataset.index);
             elmCarrousel.classList.add("carrousel--ouvrir");
             elmCarrousel__figure.children[this.dataset.index].classList.add(
                 "carrousel__figure__img--activer"
@@ -42,13 +37,12 @@
     }
 
     /**
-     *
+     * Ajoute une image dans le carrousel
      * @param {*} elmImg une image de la galerie
      */
     function ajouter_img_carrousel(elmImg) {
 // elmImg représente une image de la galerie */
         elmImg.dataset.index = index;
-        console.log(elmImg);
         let elmCarrousel__figure__img = document.createElement("img");
         elmCarrousel__figure__img.setAttribute("src", elmImg.getAttribute("src"));
         elmCarrousel__figure__img.classList.add("carrousel__figure__img");
@@ -69,9 +63,8 @@
         elmCarrousel__form__radio.dataset.index = index;
         index++;
         elmCarrousel__form.appendChild(elmCarrousel__form__radio);
+        /*------------------------- écouteur sur le bouton radio pour afficher une nouvelle image */
         elmCarrousel__form__radio.addEventListener('mousedown', function (){
-            console.log(this.dataset.index);
-
             if (dernierIndex != -1) {
                 elmCarrousel__figure.children[dernierIndex].classList.remove(
                     "carrousel__figure__img--activer"
@@ -81,17 +74,11 @@
             elmCarrousel__figure.children[this.dataset.index].classList.add(
                 "carrousel__figure__img--activer"
             );
-            console.log(index);
             dernierIndex = this.dataset.index;
         });
     }
 
-    elmBtnModale.addEventListener("mousedown" , function () {
-    console.log("bouton boîte modale");
-    elmCarrousel.classList.add("carrousel--ouvrir");
-    });
     elmBtnModaleFermer.addEventListener("mousedown" , function () {
-        console.log("bouton boîte modale");
         elmCarrousel.classList.remove("carrousel--ouvrir");
     });
 })();
