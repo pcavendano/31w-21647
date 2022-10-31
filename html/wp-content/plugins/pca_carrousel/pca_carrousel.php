@@ -11,18 +11,6 @@
 */
 
 
-
-function genere_boite(){
-	$contenu = "
-    <div class='carrousel'>
-        <button class='btn_fermer'>X</button>
-        <figure class='carrousel__figure'></figure>
-        <form class='carrousel__form'></form>
-    </div>";
-	return $contenu;
-}
-add_shortcode('pca_carrousel', 'genere_boite');
-
 function pcac_enqueue() {
 	//on ajoute filemtime parceque wp garde en cache le fichiers css et js et donc filemtime permet davoir une nouvelle version du fichier a chaque fois
 	//filemtime retourne en millisecondes le temps de la dernière sauvegarde
@@ -45,3 +33,14 @@ function pcac_enqueue() {
 		true);
 }
 add_action("wp_enqueue_scripts","pcac_enqueue");
+
+function genere_boite(){
+	$contenu = "
+    <div class='carrousel'>
+        <button class='btn_fermer'>X</button>
+        <figure class='carrousel__figure'></figure>
+        <form class='carrousel__form'></form>
+    </div>";
+	return $contenu;
+}
+add_shortcode('pca_carrousel', 'genere_boite');
