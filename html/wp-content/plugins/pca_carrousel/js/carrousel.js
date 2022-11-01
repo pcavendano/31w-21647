@@ -24,6 +24,7 @@
     for (const elmImg of elmGalerieImg) {
         ajouter_img_carrousel(elmImg);
         ajouter_radio_carrousel();
+       // ajouter_fleche_carrousel();
         /* écouteur sur les images de la galerie */
         elmImg.addEventListener("mousedown", function () {
             elmCarrousel.classList.add("carrousel--ouvrir");
@@ -65,6 +66,30 @@
         elmCarrousel__form.appendChild(elmCarrousel__form__radio);
         /*------------------------- écouteur sur le bouton radio pour afficher une nouvelle image */
         elmCarrousel__form__radio.addEventListener('mousedown', function (){
+            if (dernierIndex != -1) {
+                elmCarrousel__figure.children[dernierIndex].classList.remove(
+                    "carrousel__figure__img--activer"
+                );
+            }
+
+            elmCarrousel__figure.children[this.dataset.index].classList.add(
+                "carrousel__figure__img--activer"
+            );
+            dernierIndex = this.dataset.index;
+        });
+    }
+
+    function ajouter_fleche_carrousel() {
+
+        let elmCarrousel__fleche__droite = document.createElement('svg');
+        elmCarrousel__fleche__droite.setAttribute('name', 'carrousel__fleche--droite');
+        elmCarrousel__fleche__droite.setAttribute('class' ,'carrousel__fleche--droite');
+        elmCarrousel__fleche__droite.setAttribute('type' ,'radio');
+        elmCarrousel__fleche__droite.dataset.index = index;
+        index++;
+        elmCarrousel__form.appendChild(elmCarrousel__fleche__droite);
+        /*------------------------- écouteur sur le bouton radio pour afficher une nouvelle image */
+        elmCarrousel__fleche__droite.addEventListener('mousedown', function (){
             if (dernierIndex != -1) {
                 elmCarrousel__figure.children[dernierIndex].classList.remove(
                     "carrousel__figure__img--activer"
